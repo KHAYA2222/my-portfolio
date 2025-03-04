@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khayelihle's Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #2563eb;
+        --secondary: #4f46e5;
+        --dark: #1e293b;
+        --light: #f8fafc;
+        --accent: #8b5cf6;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #334155;
+        background-color: #f8fafc;
+        line-height: 1.7;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      section {
+        padding: 5rem 0;
+      }
+      .alert {
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 0.5rem;
+      }
+
+      .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .navbar {
+        transition: all 0.3s ease;
+        background-color: transparent;
+        padding: 1rem 0;
+      }
+
+      .navbar.scrolled {
+        background-color: var(--dark);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 0;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--light) !important;
+      }
+
+      .nav-link {
+        font-weight: 500;
+        margin: 0 0.5rem;
+        color: rgba(255, 255, 255, 0.9) !important;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -2px;
+        left: 0;
+        background-color: var(--accent);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(120deg, var(--dark), #0f172a);
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          circle at 20% 50%,
+          rgba(76, 29, 149, 0.1) 0%,
+          rgba(30, 41, 59, 0) 50%
+        );
+      }
+
+      .profile-img {
+        border: 4px solid rgba(255, 255, 255, 0.2);
+        padding: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .profile-img:hover {
+        transform: scale(1.05);
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 1rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+      }
+
+      .btn-custom {
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        border-color: var(--primary);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--secondary);
+        border-color: var(--secondary);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-outline {
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        color: #fff;
+      }
+
+      .btn-outline:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-title {
+        position: relative;
+        margin-bottom: 3rem;
+        font-weight: 700;
+        font-size: 2.25rem;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        width: 60px;
+        height: 4px;
+        background-color: var(--accent);
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .tech-badge {
+        display: inline-block;
+        padding: 0.35rem 0.75rem;
+        margin: 0.25rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        background-color: #e2e8f0;
+        color: #475569;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .tech-badge:hover {
+        background-color: var(--accent);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .education-card {
+        border-radius: 1rem;
+        overflow: hidden;
+        border: none;
+        transition: all 0.3s ease;
+        background-color: white;
+      }
+
+      .education-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .education-card .card-header {
+        background-color: var(--primary);
+        color: white;
+        padding: 1.25rem;
+        font-weight: 700;
+        font-size: 1.25rem;
+      }
+
+      .education-card .card-body {
+        padding: 1.5rem;
+      }
+
+      .project-card {
+        border-radius: 1rem;
+        overflow: hidden;
+        border: none;
+        transition: all 0.3s ease;
+        margin-bottom: 2rem;
+        background-color: white;
+      }
+
+      .project-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-card .img-overlay {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card img {
+        transition: all 0.5s ease;
+      }
+
+      .project-card:hover img {
+        transform: scale(1.1);
+      }
+
+      .project-card .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.8) 0%,
+          rgba(0, 0, 0, 0) 60%
+        );
+        opacity: 0.7;
+        transition: all 0.3s ease;
+      }
+
+      .project-card:hover .overlay {
+        opacity: 0.9;
+      }
+
+      .project-card .card-body {
+        padding: 1.5rem;
+      }
+
+      .contact-form {
+        background-color: white;
+        border-radius: 1rem;
+        padding: 2.5rem;
+      }
+
+      .contact-form .form-control {
+        border-radius: 0.5rem;
+        padding: 0.75rem 1rem;
+        border: 1px solid #e2e8f0;
+        background-color: #f8fafc;
+      }
+
+      .contact-form .form-control:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+      }
+
+      .contact-form label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        margin: 0 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .social-icon:hover {
+        background-color: var(--accent);
+        transform: translateY(-3px);
+      }
+
+      footer {
+        background-color: var(--dark);
+        padding: 2rem 0;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        background-color: var(--secondary);
+        transform: translateY(-3px);
+      }
+
+      /* About section styles */
+      .about-content {
+        position: relative;
+      }
+
+      .about-img {
+        border-radius: 1rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 1;
+      }
+
+      .about-img::after {
+        content: "";
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: -20px;
+        bottom: -20px;
+        border: 3px solid var(--accent);
+        border-radius: 1rem;
+        z-index: -1;
+      }
+
+      .about-text {
+        padding: 2rem;
+      }
+
+      .skill-bar {
+        margin-bottom: 1.5rem;
+      }
+
+      .skill-name {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .skill-progress {
+        height: 10px;
+        border-radius: 9999px;
+        background-color: #e2e8f0;
+        overflow: hidden;
+      }
+
+      .skill-progress-bar {
+        height: 100%;
+        border-radius: 9999px;
+        background: linear-gradient(to right, var(--primary), var(--accent));
+        transition: width 1s ease;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.8s ease forwards;
+      }
+
+      .delay-1 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.4s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.6s;
+      }
+
+      /* Testimonials */
+      .testimonial-card {
+        background-color: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        position: relative;
+        margin-top: 2.5rem;
+      }
+
+      .testimonial-img {
+        width: 5rem;
+        height: 5rem;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid white;
+        position: absolute;
+        top: -2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      .testimonial-text {
+        margin-top: 2.5rem;
+        font-style: italic;
+        color: #475569;
+      }
+
+      .testimonial-name {
+        font-weight: 700;
+        margin-bottom: 0;
+        color: var(--dark);
+      }
+
+      .testimonial-position {
+        font-size: 0.875rem;
+        color: var(--accent);
+      }
+
+      /* Responsive */
+      @media (max-width: 991.98px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .about-img::after {
+          display: none;
+        }
+      }
+
+      @media (max-width: 767.98px) {
+        .hero {
+          text-align: center;
+        }
+
+        .profile-img {
+          margin-bottom: 2rem;
+        }
+
+        .section-title {
+          font-size: 1.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#"
+          >Khayelihle's<span style="color: var(--accent)">Portfolio</span></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#hero">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#education">Education</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <!-- <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-md-end text-center mb-5 mb-md-0">
+            <img
+              src="{{ url_for('static', filename='assets/images/profilePicture.JPG') }}"
+              width="280"
+              height="280"
+              alt="Profile Picture"
+              alt="Profile Picture"
+              class="img-fluid rounded-circle profile-img shadow-lg fade-in"
+            />
+          </div>
+          <div class="col-md-6 text-white fade-in delay-1">
+            <h1 class="hero-title">
+              Hi, I'm <span style="color: var(--accent)">Khayelihle</span>
+            </h1>
+            <p class="hero-subtitle">Web Developer & Problem Solver</p>
+            <div
+              class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start"
+            >
+              <div class="tech-badge">
+                <i class="fab fa-python me-1"></i> Python
+              </div>
+
+              <div class="tech-badge"><i class="fas fa-code me-1"></i> C#</div>
+
+              <div class="tech-badge">
+                <i class="fas fa-flask me-1"></i> Flask
+              </div>
+
+              <div class="tech-badge">
+                <i class="fab fa-html5 me-1"></i> HTML
+              </div>
+              <div class="tech-badge">
+                <i class="fab fa-css3-alt me-1"></i> CSS
+              </div>
+              <div class="tech-badge">
+                <i class="fab fa-js me-1"></i> JavaScript
+              </div>
+              <div class="tech-badge">
+                <i class="fab fa-bootstrap me-1"></i> Bootstrap
+              </div>
+            </div>
+            <div class="mt-4 fade-in delay-2">
+              <a href="#projects" class="btn btn-primary btn-custom me-3 mb-2"
+                >View My Work</a
+              >
+              <a href="#contact" class="btn btn-outline btn-custom mb-2"
+                >Get In Touch</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-white">
+      <div class="container">
+        <h2 class="section-title text-center">About Me</h2>
+        <div class="row align-items-center">
+          <div class="col-lg-5 mb-4 mb-lg-0">
+            <div class="about-content">
+              <img
+                src="{{ url_for('static', filename='assets/images/background.jpg') }}"
+                width="280"
+                height="280"
+                alt="About Me"
+                class="img-fluid about-img"
+              />
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="about-text">
+              <h3 class="mb-3">Who am I?</h3>
+              <p class="lead mb-4">
+                I'm a web developer with a background in Information Technology,
+                specializing in software development. I have a strong foundation
+                in creating clean, functional, and user-friendly web
+                applications.
+              </p>
+              <p>
+                With a National Diploma in Information Technology (Software
+                Development) and self-taught Python skills, I bring a structured
+                yet adaptable approach to problem-solving and application
+                development. I'm continuously expanding my expertise by
+                exploring new technologies and best practices in the field.
+              </p>
+              <p>
+                When I'm not coding, you can find me playing games, reading tech
+                blogs, or diving into the latest tech trends.
+              </p>
+
+              <div class="row mt-4">
+                <div class="col-md-6">
+                  <ul class="list-unstyled">
+                    <li class="mb-2">
+                      <strong>Name:</strong> Khayelihle Xolani Mathebula
+                    </li>
+                    <li class="mb-2">
+                      <strong>Email:</strong> khayelihlexolani28@gmail.com
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="col-md-6">
+                  <ul class="list-unstyled">
+                    <li class="mb-2">
+                      <strong>Location:</strong> 594 Visvanger Street, Meyerton,
+                      Daleside, 1873
+                    </li>
+                    <li class="mb-2">
+                      <strong>Available:</strong> For Freelance & Full-time
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <a
+                href="https://drive.google.com/file/d/1boa1b5Gs0jNsGFVnmBlcfZQjgMUxYCJT/view?usp=sharing"
+                class="btn btn-primary btn-custom mt-3"
+                download
+                target="_blank"
+              >
+                <i class="fas fa-download me-2"></i> Download Resume
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="bg-light">
+      <div class="container">
+        <h2 class="section-title text-center">Education & Certifications</h2>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="education-card h-100">
+              <div class="card-header">
+                <i class="fas fa-graduation-cap me-2"></i> Formal Education
+              </div>
+              <div class="card-body">
+                <h4>National Diploma in Information Technology</h4>
+                <p class="text-muted">Specialization: Software Development</p>
+                <p class="mb-0">
+                  <i class="fas fa-calendar-alt me-2"></i> 2025
+                </p>
+                <p>
+                  <i class="fas fa-map-marker-alt me-2"></i> Central University
+                  of Technology, FS
+                </p>
+                <p>
+                  Focused on software development fundamentals, database design,
+                  and system analysis. Completed projects in web development and
+                  software engineering.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="education-card h-100">
+              <div class="card-header">
+                <i class="fas fa-certificate me-2"></i> Certifications
+              </div>
+              <div class="card-body">
+                <h4>.NET Full Specialization</h4>
+                <p class="text-muted">Coursera</p>
+                <p><i class="fas fa-calendar-alt me-2"></i> 2024</p>
+                <p>
+                  Comprehensive training in .NET framework, C# programming,
+                  ASP.NET web development, and database integration with Entity
+                  Framework.
+                </p>
+                <a
+                  href="https://drive.google.com/file/d/13bCb2avsr7XxP7uC3WpBLfRCfSdrT8Sy/view?usp=sharing"
+                  class="btn btn-sm btn-outline-primary mt-2"
+                  >View Certificate</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="bg-white">
+      <div class="container">
+        <h2 class="section-title text-center">Skills & Expertise</h2>
+        <div class="row">
+          <div class="col-lg-6">
+            <h3 class="mb-4">Technical Skills</h3>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>C# .Net</span>
+                <span>60%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 60%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>Python</span>
+                <span>55%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 55%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>Flask Framework</span>
+                <span>55%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 55%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>HTML & CSS</span>
+                <span>70%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 70%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>JavaScript</span>
+                <span>50%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 50%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>Bootstrap</span>
+                <span>55%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 55%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h3 class="mb-4">Professional Skills</h3>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>Problem Solving</span>
+                <span>60%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 60%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>Project Management</span>
+                <span>70%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 70%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>UI/UX Design</span>
+                <span>50%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 50%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>Communication</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-name">
+                <span>Adaptability</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-progress">
+                <div class="skill-progress-bar" style="width: 90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-5">
+          <h4 class="mb-3">Other Technologies I Work With</h4>
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <div class="tech-badge">Git</div>
+            <div class="tech-badge">SQL</div>
+            <div class="tech-badge">MySQL</div>
+            <div class="tech-badge">SQLite</div>
+            <div class="tech-badge">jQuery</div>
+            <div class="tech-badge">RESTful APIs</div>
+            <div class="tech-badge">JSON</div>
+            <div class="tech-badge">Responsive Design</div>
+            <!-- <div class="tech-badge">SASS/SCSS</div> -->
+            <div class="tech-badge">VS Code</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="bg-light">
+      <div class="container">
+        <h2 class="section-title text-center">My Recent Projects</h2>
+        <div class="row">
+          <div class="col-md-6 col-lg-4">
+            <div class="project-card">
+              <div class="img-overlay">
+                <img
+                  src="{{ url_for('static', filename='assets/images/quote_app.png') }}"
+                  class="card-img-top"
+                  alt="Project 1"
+                />
+                <div class="overlay"></div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Quote App</h5>
+                <p class="card-text">
+                  A simple web application that allows users to share and view
+                  quotes based on different moods.
+                </p>
+                <div class="d-flex flex-wrap mb-3">
+                  <span class="badge bg-primary me-1 mb-1">Python</span>
+                  <span class="badge bg-secondary me-1 mb-1">Flask</span>
+                  <span class="badge bg-danger me-1 mb-1">HTML5</span>
+                  <span class="badge bg-info me-1 mb-1">CSS3</span>
+                  <!-- <span class="badge bg-info me-1 mb-1">Bootstrap</span> -->
+                  <!-- <span class="badge bg-dark me-1 mb-1">Chart.js</span> -->
+                </div>
+                <div class="d-flex">
+                  <a
+                    href="https://py-quotes.onrender.com"
+                    class="btn btn-sm btn-primary me-2"
+                  >
+                    <i class="fas fa-eye me-1"></i> Live Demo
+                  </a>
+                  <a
+                    href="https://github.com/KHAYA2222/py-quotes.git"
+                    class="btn btn-sm btn-outline-dark"
+                  >
+                    <i class="fab fa-github me-1"></i> Code
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="img-overlay">
+                            <img src="/api/placeholder/600/400" class="card-img-top" alt="Project 2">
+                            <div class="overlay"></div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Task Management App</h5>
+                            <p class="card-text">A full-featured task manager with user authentication, task categorization, and deadline reminders.</p>
+                            <div class="d-flex flex-wrap mb-3">
+                                <span class="badge bg-primary me-1 mb-1">Python</span>
+                                <span class="badge bg-secondary me-1 mb-1">Flask</span>
+                                <span class="badge bg-warning text-dark me-1 mb-1">JavaScript</span>
+                                <span class="badge bg-info me-1 mb-1">SQLite</span>
+                            </div>
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-sm btn-primary me-2">
+                                    <i class="fas fa-eye me-1"></i> Live Demo
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-dark">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card">
+                        <div class="img-overlay">
+                            <img src="/api/placeholder/600/400" class="card-img-top" alt="Project 3">
+                            <div class="overlay"></div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Weather Forecast App</h5>
+                            <p class="card-text">A weather application that provides current conditions and 5-day forecasts using external API integration.</p>
+                            <div class="d-flex flex-wrap mb-3">
+                                <span class="badge bg-warning text-dark me-1 mb-1">JavaScript</span>
+                                <span class="badge bg-danger me-1 mb-1">HTML5</span>
+                                <span class="badge bg-info me-1 mb-1">CSS3</span>
+                                <span class="badge bg-success me-1 mb-1">API</span>
+                            </div>
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-sm btn-primary me-2">
+                                    <i class="fas fa-eye me-1"></i> Live Demo
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-dark">
+                                    <i class="fab fa-github me-1"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+        <div class="text-center mt-4">
+          <a href="#" class="btn btn-primary btn-custom">
+            <i class="fas fa-folder-open me-2"></i> View All Projects
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section
+    <section id="testimonials" class="bg-white">
+        <div class="container">
+            <h2 class="section-title text-center">What Clients Say</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card h-100">
+                        <img src="/api/placeholder/100/100" class="testimonial-img" alt="Client 1">
+                        <div class="testimonial-text">
+                            "Working with this developer was a pleasure. They delivered the project on time and the code was clean and well-documented. I highly recommend their services!"
+                        </div>
+                        <div class="mt-3 text-center">
+                            <h5 class="testimonial-name">John Doe</h5>
+                            <p class="testimonial-position">Project Manager, Tech Company</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card h-100">
+                        <img src="/api/placeholder/100/100" class="testimonial-img" alt="Client 2">
+                        <div class="testimonial-text">
+                            "Outstanding work on our e-commerce platform. The attention to detail and user experience considerations were excellent. We'll definitely work together again!"
+                        </div>
+                        <div class="mt-3 text-center">
+                            <h5 class="testimonial-name">Jane Smith</h5>
+                            <p class="testimonial-position">Business Owner, Retail</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card h-100">
+                        <img src="/api/placeholder/100/100" class="testimonial-img" alt="Client 3">
+                        <div class="testimonial-text">
+                            "This developer solved a complex problem that our team had been struggling with for weeks. Their technical knowledge and problem-solving skills are impressive!"
+                        </div>
+                        <div class="mt-3 text-center">
+                            <h5 class="testimonial-name">Robert Johnson</h5>
+                            <p class="testimonial-position">CTO, Software Company</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-light">
+      <div class="container">
+        <h2 class="section-title text-center">Get In Touch</h2>
+        <div class="row">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="contact-form shadow">
+              <!-- Update the form action to use Formspree -->
+              <form action="https://formspree.io/f/xgvogbbq" method="POST">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Your email"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="subject" class="form-label">Subject</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="subject"
+                    name="subject"
+                    placeholder="Subject"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    name="message"
+                    rows="5"
+                    placeholder="Your message"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-custom w-100">
+                  <i class="fas fa-paper-plane me-2"></i> Send Message
+                </button>
+              </form>
+
+              <!-- Optional: Add a hidden input for redirect after submission -->
+              <input
+                type="hidden"
+                name="_next"
+                value="https://yourwebsite.com/thank-you.html"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="h-100 d-flex flex-column p-4">
+              <h3 class="mb-4">Contact Information</h3>
+              <p class="lead">
+                Feel free to reach out to me with any questions or
+                opportunities!
+              </p>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-3">
+                  <i class="fas fa-map-marker-alt me-2 text-primary"></i> 594
+                  Visvanger Street, Meyerton, Daleside, 1873
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-envelope me-2 text-primary"></i>
+                  khayelihlexolani28@gmail.com
+                </li>
+                <li class="mb-3">
+                  <i class="fas fa-phone me-2 text-primary"></i> +27 61 632 7911
+                </li>
+              </ul>
+              <!-- <h4 class="mb-3">Follow Me</h4>
+          <div class="social-links">
+            <a href="#" class="me-2">
+              <i class="fab fa-github fa-2x text-dark"></i>
+            </a>
+            <a href="#" class="me-2">
+              <i class="fab fa-linkedin fa-2x text-primary"></i>
+            </a>
+            <a href="#" class="me-2">
+              <i class="fab fa-twitter fa-2x text-info"></i>
+            </a>
+            <a href="#" class="me-2">
+              <i class="fab fa-instagram fa-2x text-danger"></i>
+            </a>
+          </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="text-white text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="social-icons mb-4">
+              <a href="https://github.com/KHAYA2222" class="social-icon"
+                ><i class="fab fa-github"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/in/khayelihle-mathebula-04398a214"
+                class="social-icon"
+              >
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <!-- <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon"
+                ><i class="fab fa-instagram"></i
+              ></a> -->
+            </div>
+            <p class="mb-0">© 2025 Khayelihle. All rights reserved.</p>
+            <p class="small">
+              Designed with <i class="fas fa-heart text-danger"></i> by
+              Khayelihle
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Navbar scroll effect
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+
+        // Back to top button visibility
+        const backToTop = document.querySelector(".back-to-top");
+        if (window.scrollY > 300) {
+          backToTop.classList.add("visible");
+        } else {
+          backToTop.classList.remove("visible");
+        }
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const target = document.querySelector(this.getAttribute("href"));
+          window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: "smooth",
+          });
+
+          // Close mobile menu after clicking
+          const navbarToggler = document.querySelector(".navbar-toggler");
+          const navbarCollapse = document.querySelector(".navbar-collapse");
+          if (navbarCollapse.classList.contains("show")) {
+            navbarToggler.click();
+          }
+        });
+      });
+
+      // Initialize skill progress animation
+      function animateSkills() {
+        const skillBars = document.querySelectorAll(".skill-progress-bar");
+        skillBars.forEach((bar) => {
+          const targetWidth = bar.style.width;
+          bar.style.width = "0";
+          setTimeout(() => {
+            bar.style.width = targetWidth;
+          }, 500);
+        });
+      }
+
+      // Run animations when in viewport
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (entry.target.closest("#skills")) {
+                animateSkills();
+              }
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll("section").forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Active navigation based on scroll position
+      window.addEventListener("scroll", function () {
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        let current = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+
+          if (scrollY >= sectionTop - 100) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      });
+      const form = document.querySelector("form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault(); // Prevent the default form submission
+
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        if (response.ok) {
+          // Display a success message
+          const successMessage = document.createElement("div");
+          successMessage.className = "alert alert-success mt-3";
+          successMessage.textContent = "Thank you! Your message has been sent.";
+          form.parentNode.insertBefore(successMessage, form.nextSibling);
+
+          // Clear the form
+          form.reset();
+        } else {
+          // Display an error message
+          const errorMessage = document.createElement("div");
+          errorMessage.className = "alert alert-danger mt-3";
+          errorMessage.textContent =
+            "Oops! Something went wrong. Please try again.";
+          form.parentNode.insertBefore(errorMessage, form.nextSibling);
+        }
+      });
+    </script>
+  </body>
+</html>
