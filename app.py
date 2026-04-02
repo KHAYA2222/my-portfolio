@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Gmail's SMTP server
 app.config['MAIL_PORT'] = 587  # Port for TLS
 app.config['MAIL_USE_TLS'] = True  # Use TLS
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')  # Your email
+app.config['MAIL_USERNAME'] = os.getenv('khayelihlexolani28@gmail.com')  # Your email
 # Your email password or app password
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.secret_key = os.getenv('SECRET_KEY')  # Required for flashing messages
