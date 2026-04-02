@@ -71,7 +71,7 @@
 
         <div class="hero-image fade-in delay-1">
           <img
-            src="{{ url_for('static', filename='assets/images/profilePicture.JPG') }}"
+            src="{{ url_for('static', filename='images/Profile.jpg') }}"
             alt="Khayelihle Mathebula"
             class="profile-img"
           />
@@ -195,7 +195,12 @@
         </p>
         <div class="projects-grid">
           <div class="project-card fade-in delay-2">
-            <div class="project-image"><i class="fas fa-quote-left"></i></div>
+            <div class="project-image">
+              <img
+                src="{{ url_for('static', filename='images/qoute_app.jpg') }}"
+                alt="Quote App"
+              />
+            </div>
             <div class="project-content">
               <h3>Quote App</h3>
               <p>
@@ -228,7 +233,12 @@
           </div>
 
           <div class="project-card fade-in delay-3">
-            <div class="project-image"><i class="fas fa-chart-line"></i></div>
+            <div class="project-image">
+              <img
+                src="{{ url_for('static', filename='images/background.jpg') }}"
+                alt="Daily Tracker"
+              />
+            </div>
             <div class="project-content">
               <h3>Daily Tracker</h3>
               <p>
@@ -258,7 +268,12 @@
           </div>
 
           <div class="project-card fade-in delay-2">
-            <div class="project-image"><i class="fas fa-user"></i></div>
+            <div class="project-image">
+              <img
+                src="{{ url_for('static', filename='images/Profile.jpg') }}"
+                alt="Portfolio Website"
+              />
+            </div>
             <div class="project-content">
               <h3>Portfolio Website</h3>
               <p>
@@ -456,7 +471,7 @@
         .querySelectorAll(".fade-in")
         .forEach((el) => observer.observe(el));
 
-      // Contact form — AJAX submit
+      // Contact form AJAX submit
       document
         .getElementById("contactForm")
         .addEventListener("submit", function (e) {
