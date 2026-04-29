@@ -27,392 +27,358 @@
     {% endif %} {% endwith %}
 
     <!-- Header -->
-    <header class="header">
-      <nav class="nav">
-        <a href="#" class="logo">Khayelihle</a>
-        <ul class="nav-links">
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button class="mobile-menu" onclick="toggleMenu()">
-          <i class="fas fa-bars"></i>
-        </button>
-      </nav>
-    </header>
+<main id="main-content">
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-      <div class="hero-container">
-        <div class="hero-content fade-in">
-          <h1>Hi, I'm <span class="highlight">Khayelihle</span></h1>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-container">
+      <div class="hero-content fade-in">
+        <h1>Hi, I'm <span class="highlight">Khayelihle</span></h1>
+        <p>
+          A passionate web developer specializing in creating clean,
+          functional, and user-friendly applications. I bring ideas to life
+          through code.
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">
+            <i class="fas fa-code" aria-hidden="true"></i> View My Work
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <i class="fas fa-envelope" aria-hidden="true"></i> Get In Touch
+          </a>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">C#</span>
+          <span class="tech-badge">Flutter</span>
+          <span class="tech-badge">Flask</span>
+          <span class="tech-badge">JavaScript</span>
+          <span class="tech-badge">HTML/CSS</span>
+        </div>
+      </div>
+
+      <div class="hero-image fade-in delay-1">
+        <img
+          src="{{ url_for('static', filename='assets/images/profilePicture.JPG') }}"
+          alt="Khayelihle Mathebula — web developer based in Randvaal, South Africa"
+          class="profile-img"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section bg-light" id="about">
+    <div class="container">
+      <h2 class="section-title fade-in">About Me</h2>
+      <p class="section-subtitle fade-in delay-1">
+        Get to know more about my journey and passion for development
+      </p>
+      <div class="about-grid">
+        <div class="about-text fade-in delay-2">
+          <h3>Who am I?</h3>
           <p>
-            A passionate web developer specializing in creating clean,
-            functional, and user-friendly applications. I bring ideas to life
-            through code.
+            I'm a web developer with a background in Information Technology,
+            specializing in software development. I have a strong foundation
+            in creating clean, functional, and user-friendly web applications.
           </p>
-          <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary">
-              <i class="fas fa-code"></i> View My Work
-            </a>
-            <a href="#contact" class="btn btn-secondary">
-              <i class="fas fa-envelope"></i> Get In Touch
-            </a>
-          </div>
-          <div class="tech-stack">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">C#</span>
-            <span class="tech-badge">Flutter</span>
-            <span class="tech-badge">Flask</span>
-            <span class="tech-badge">JavaScript</span>
-            <span class="tech-badge">HTML/CSS</span>
-          </div>
-        </div>
-
-        <div class="hero-image fade-in delay-1">
-          <img
-            src="{{ url_for('static', filename='assets/images/profilePicture.JPG') }}"
-            alt="Khayelihle Mathebula"
-            class="profile-img"
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section bg-light" id="about">
-      <div class="container">
-        <h2 class="section-title fade-in">About Me</h2>
-        <p class="section-subtitle fade-in delay-1">
-          Get to know more about my journey and passion for development
-        </p>
-        <div class="about-grid">
-          <div class="about-text fade-in delay-2">
-            <h3>Who am I?</h3>
-            <p>
-              I'm a web developer with a background in Information Technology,
-              specializing in software development. I have a strong foundation
-              in creating clean, functional, and user-friendly web applications.
-            </p>
-            <p>
-              With a Diploma in Information Technology (Software Development)
-              and self-taught Python skills, I bring a structured yet adaptable
-              approach to problem-solving and application development.
-            </p>
-            <p>
-              When I'm not coding, you can find me playing games, reading tech
-              blogs, or diving into the latest tech trends.
-            </p>
-            <a
-              href="https://drive.google.com/file/d/1timHUTIc_wkqfVqxfr06JFco4KZD7IWG/view?usp=drive_link"
-              class="btn btn-primary mt-4"
-              target="_blank"
-            >
-              <i class="fas fa-download"></i> Download Resume
-            </a>
-          </div>
-
-          <div class="about-stats fade-in delay-3">
-            <div class="stat-item">
-              <span class="stat-number">1+</span>
-              <span class="stat-label">Years Learning</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">3+</span>
-              <span class="stat-label">Projects Completed</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">6+</span>
-              <span class="stat-label">Technologies</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">1</span>
-              <span class="stat-label">Published App</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="section" id="skills">
-      <div class="container">
-        <h2 class="section-title fade-in">Skills & Technologies</h2>
-        <p class="section-subtitle fade-in delay-1">
-          Technologies and tools I work with
-        </p>
-        <div class="skills-grid">
-          <div class="skill-category fade-in delay-2">
-            <h3><i class="fas fa-code"></i> Programming Languages</h3>
-            <div class="skill-list">
-              <span class="skill-item">Python</span>
-              <span class="skill-item">C#</span>
-              <span class="skill-item">JavaScript</span>
-              <span class="skill-item">Dart</span>
-              <span class="skill-item">SQL</span>
-            </div>
-          </div>
-          <div class="skill-category fade-in delay-3">
-            <h3><i class="fas fa-globe"></i> Web Technologies</h3>
-            <div class="skill-list">
-              <span class="skill-item">HTML5</span>
-              <span class="skill-item">CSS3</span>
-              <span class="skill-item">Bootstrap</span>
-              <span class="skill-item">Flask</span>
-              <span class="skill-item">REST APIs</span>
-              <span class="skill-item">JSON</span>
-            </div>
-          </div>
-          <div class="skill-category fade-in delay-2">
-            <h3><i class="fas fa-mobile-alt"></i> Mobile & Frameworks</h3>
-            <div class="skill-list">
-              <span class="skill-item">Flutter</span>
-              <span class="skill-item">.NET Framework</span>
-              <span class="skill-item">ASP.NET</span>
-              <span class="skill-item">Entity Framework</span>
-            </div>
-          </div>
-          <div class="skill-category fade-in delay-3">
-            <h3><i class="fas fa-tools"></i> Tools & Database</h3>
-            <div class="skill-list">
-              <span class="skill-item">Git</span>
-              <span class="skill-item">VS Code</span>
-              <span class="skill-item">MySQL</span>
-              <span class="skill-item">SQLite</span>
-              <span class="skill-item">jQuery</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="section bg-light" id="projects">
-      <div class="container">
-        <h2 class="section-title fade-in">Featured Projects</h2>
-        <p class="section-subtitle fade-in delay-1">
-          Some of my recent work and personal projects
-        </p>
-        <div class="projects-grid">
-          <div class="project-card fade-in delay-2">
-            <div class="project-image">
-              <img
-                src="{{ url_for('static', filename='assets/images/quote1_app.png') }}"
-                alt="Quote App"
-              />
-            </div>
-            <div class="project-content">
-              <h3>Quote App</h3>
-              <p>
-                A simple web application that allows users to share and view
-                quotes based on different moods. Built with Flask and Python.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Flask</span>
-                <span class="tech-tag">HTML/CSS</span>
-                <span class="tech-tag">SQLite</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://py-quotes.onrender.com"
-                  class="project-link primary"
-                  target="_blank"
-                >
-                  <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                <a
-                  href="https://github.com/KHAYA2222/py-quotes.git"
-                  class="project-link secondary"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i> Code
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card fade-in delay-3">
-            <div class="project-image">
-              <img
-                src="{{ url_for('static', filename='assets/images/Daily_Trackerp1.jpg') }}"
-                alt="Daily Tracker"
-              />
-            </div>
-            <div class="project-content">
-              <h3>Daily Tracker</h3>
-              <p>
-                A mobile application that helps users track their daily expenses
-                in a simple, clean way to promote financial awareness and
-                discipline.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">Flutter</span>
-                <span class="tech-tag">Dart</span>
-                <span class="tech-tag">Local Storage</span>
-                <span class="tech-tag">Material UI</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://play.google.com/store/apps/details?id=com.khayelihle.dailytracker"
-                  class="project-link primary"
-                  target="_blank"
-                >
-                  <i class="fab fa-google-play"></i> Play Store
-                </a>
-                <a href="#" class="project-link secondary">
-                  <i class="fab fa-github"></i> Code
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card fade-in delay-2">
-            <div class="project-image">
-              <img
-                src="{{ url_for('static', filename='assets/images/background1.jpg') }}"
-                alt="Portfolio Website"
-              />
-            </div>
-            <div class="project-content">
-              <h3>Portfolio Website</h3>
-              <p>
-                A modern, responsive portfolio website built with Flask backend
-                and clean HTML/CSS frontend. Features contact form integration.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">Flask</span>
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">HTML/CSS</span>
-                <span class="tech-tag">JavaScript</span>
-              </div>
-              <div class="project-links">
-                <a href="#" class="project-link primary">
-                  <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                <a
-                  href="https://github.com/KHAYA2222"
-                  class="project-link secondary"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i> Code
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="text-center mt-4 fade-in delay-3">
-          <a
-            href="https://github.com/KHAYA2222"
-            class="btn btn-primary"
+          <p>
+            With a Diploma in Information Technology (Software Development)
+            and self-taught Python skills, I bring a structured yet adaptable
+            approach to problem-solving and application development.
+          </p>
+          <p>
+            When I'm not coding, you can find me playing games, reading tech
+            blogs, or diving into the latest tech trends.
+          </p>
+          
+            href="https://drive.google.com/file/d/1timHUTIc_wkqfVqxfr06JFco4KZD7IWG/view?usp=drive_link"
+            class="btn btn-primary mt-4"
             target="_blank"
+            rel="noopener noreferrer"
           >
-            <i class="fab fa-github"></i> View All Projects
+            <i class="fas fa-download" aria-hidden="true"></i> Download Resume
           </a>
         </div>
-      </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-      <div class="container">
-        <h2 class="section-title fade-in">Get In Touch</h2>
-        <p class="section-subtitle fade-in delay-1">
-          Let's discuss your project or just say hello
-        </p>
-        <div class="contact-grid">
-          <div class="contact-info fade-in delay-2">
-            <h3>Contact Information</h3>
+        <div class="about-stats fade-in delay-3">
+          <div class="stat-item">
+            <span class="stat-number">1+</span>
+            <span class="stat-label">Years Learning</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">3+</span>
+            <span class="stat-label">Projects Completed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">6+</span>
+            <span class="stat-label">Technologies</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">1</span>
+            <span class="stat-label">Published App</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section" id="skills">
+    <div class="container">
+      <h2 class="section-title fade-in">Skills & Technologies</h2>
+      <p class="section-subtitle fade-in delay-1">
+        Technologies and tools I work with
+      </p>
+      <div class="skills-grid">
+        <div class="skill-category fade-in delay-2">
+          <h3><i class="fas fa-code" aria-hidden="true"></i> Programming Languages</h3>
+          <div class="skill-list">
+            <span class="skill-item">Python</span>
+            <span class="skill-item">C#</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">Dart</span>
+            <span class="skill-item">SQL</span>
+          </div>
+        </div>
+        <div class="skill-category fade-in delay-3">
+          <h3><i class="fas fa-globe" aria-hidden="true"></i> Web Technologies</h3>
+          <div class="skill-list">
+            <span class="skill-item">HTML5</span>
+            <span class="skill-item">CSS3</span>
+            <span class="skill-item">Bootstrap</span>
+            <span class="skill-item">Flask</span>
+            <span class="skill-item">REST APIs</span>
+            <span class="skill-item">JSON</span>
+          </div>
+        </div>
+        <div class="skill-category fade-in delay-2">
+          <h3><i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile & Frameworks</h3>
+          <div class="skill-list">
+            <span class="skill-item">Flutter</span>
+            <span class="skill-item">.NET Framework</span>
+            <span class="skill-item">ASP.NET</span>
+            <span class="skill-item">Entity Framework</span>
+          </div>
+        </div>
+        <div class="skill-category fade-in delay-3">
+          <h3><i class="fas fa-tools" aria-hidden="true"></i> Tools & Database</h3>
+          <div class="skill-list">
+            <span class="skill-item">Git</span>
+            <span class="skill-item">VS Code</span>
+            <span class="skill-item">MySQL</span>
+            <span class="skill-item">SQLite</span>
+            <span class="skill-item">jQuery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="section bg-light" id="projects">
+    <div class="container">
+      <h2 class="section-title fade-in">Featured Projects</h2>
+      <p class="section-subtitle fade-in delay-1">
+        Some of my recent work and personal projects
+      </p>
+      <div class="projects-grid">
+        <div class="project-card fade-in delay-2">
+          <div class="project-image">
+            <img
+              src="{{ url_for('static', filename='assets/images/quote1_app.png') }}"
+              alt="Quote App — a Flask web app for sharing mood-based quotes"
+            />
+          </div>
+          <div class="project-content">
+            <h3>Quote App</h3>
             <p>
-              Feel free to reach out to me with any questions or opportunities.
-              I'm always excited to work on new projects!
+              A simple web application that allows users to share and view
+              quotes based on different moods. Built with Flask and Python.
             </p>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-              <div class="contact-details">
-                <h4>Email</h4>
-                <span>khayelihlexolani28@gmail.com</span>
-              </div>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">HTML/CSS</span>
+              <span class="tech-tag">SQLite</span>
             </div>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-phone"></i></div>
-              <div class="contact-details">
-                <h4>Phone</h4>
-                <span>+27 61 632 7911</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i class="fas fa-map-marker-alt"></i>
-              </div>
-              <div class="contact-details">
-                <h4>Location</h4>
-                <span>Visvanger, Randvaal</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fas fa-clock"></i></div>
-              <div class="contact-details">
-                <h4>Availability</h4>
-                <span>Available for Freelance & Full-time</span>
-              </div>
+            <div class="project-links">
+              
+                href="https://py-quotes.onrender.com"
+                class="project-link primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo
+              </a>
+              
+                href="https://github.com/KHAYA2222/py-quotes.git"
+                class="project-link secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-github" aria-hidden="true"></i> Code
+              </a>
             </div>
           </div>
+        </div>
 
-          <div class="contact-form fade-in delay-3">
-            <form id="contactForm" action="/submit" method="POST">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required />
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required />
-              </div>
-              <div class="form-group">
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" required />
-              </div>
-              <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary" style="width: 100%">
-                <i class="fas fa-paper-plane"></i> Send Message
-              </button>
-            </form>
+        <div class="project-card fade-in delay-3">
+          <div class="project-image">
+            <img
+              src="{{ url_for('static', filename='assets/images/Daily_Trackerp1.jpg') }}"
+              alt="Daily Tracker — a Flutter mobile app for tracking daily expenses"
+            />
+          </div>
+          <div class="project-content">
+            <h3>Daily Tracker</h3>
+            <p>
+              A mobile application that helps users track their daily expenses
+              in a simple, clean way to promote financial awareness and
+              discipline.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Flutter</span>
+              <span class="tech-tag">Dart</span>
+              <span class="tech-tag">Local Storage</span>
+              <span class="tech-tag">Material UI</span>
+            </div>
+            <div class="project-links">
+              
+                href="https://play.google.com/store/apps/details?id=com.khayelihle.dailytracker"
+                class="project-link primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-google-play" aria-hidden="true"></i> Play Store
+              </a>
+              <a href="#" class="project-link secondary" aria-label="Source code coming soon">
+                <i class="fab fa-github" aria-hidden="true"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in delay-2">
+          <div class="project-image">
+            <img
+              src="{{ url_for('static', filename='assets/images/background1.jpg') }}"
+              alt="Portfolio Website — built with Flask and HTML/CSS"
+            />
+          </div>
+          <div class="project-content">
+            <h3>Portfolio Website</h3>
+            <p>
+              A modern, responsive portfolio website built with Flask backend
+              and clean HTML/CSS frontend. Features contact form integration.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">HTML/CSS</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link primary" aria-label="Live demo coming soon">
+                <i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo
+              </a>
+              
+                href="https://github.com/KHAYA2222"
+                class="project-link secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-github" aria-hidden="true"></i> Code
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="social-links">
-          <a
-            href="https://github.com/KHAYA2222"
-            class="social-link"
-            target="_blank"
-          >
-            <i class="fab fa-github"></i>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/khayelihle-mathebula-04398a214"
-            class="social-link"
-            target="_blank"
-          >
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="mailto:khayelihlexolani28@gmail.com" class="social-link">
-            <i class="fas fa-envelope"></i>
-          </a>
-        </div>
-        <p>&copy; 2025 Khayelihle Mathebula. All rights reserved.</p>
+      <div class="text-center mt-4 fade-in delay-3">
+        
+          href="https://github.com/KHAYA2222"
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="fab fa-github" aria-hidden="true"></i> View All Projects
+        </a>
       </div>
-    </footer>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="section-title fade-in">Get In Touch</h2>
+      <p class="section-subtitle fade-in delay-1">
+        Let's discuss your project or just say hello
+      </p>
+      <div class="contact-grid">
+        <div class="contact-info fade-in delay-2">
+          <h3>Contact Information</h3>
+          <p>
+            Feel free to reach out to me with any questions or opportunities.
+            I'm always excited to work on new projects!
+          </p>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
+            <div class="contact-details">
+              <h4>Email</h4>
+              <span>khayelihlexolani28@gmail.com</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone" aria-hidden="true"></i></div>
+            <div class="contact-details">
+              <h4>Phone</h4>
+              <span>+27 61 632 7911</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
+            <div class="contact-details">
+              <h4>Location</h4>
+              <span>Visvanger, Randvaal</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-clock" aria-hidden="true"></i></div>
+            <div class="contact-details">
+              <h4>Availability</h4>
+              <span>Available for Freelance & Full-time</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form fade-in delay-3">
+          <form id="contactForm" action="/submit" method="POST" novalidate>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              <i class="fas fa-paper-plane" aria-hidden="true"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
 
     <script>
       // Mobile menu toggle
