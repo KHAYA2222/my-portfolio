@@ -1078,3 +1078,60 @@ body::before {
   .section { padding: 4rem 0; }
   .portrait-ring { width: 240px; height: 240px; }
 }
+.project-link.static { cursor: default; }
+.project-link.static:hover { transform: none; }
+/* Equal-height cards, buttons pinned to the bottom */
+.project-card { display: flex; flex-direction: column; }
+.project-content { display: flex; flex-direction: column; flex: 1; }
+.project-links { margin-top: auto; }
+.project-tech { margin-bottom: 1.1rem; }
+
+/* Contain-mode frame for portrait phone screenshots */
+.project-image.contain { background: var(--bg-elevated); }
+.project-image.contain img { object-fit: contain; }
+/* ── Compact project cards (single consolidated block) ── */
+.projects-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.project-card { display: flex; flex-direction: column; }
+
+.project-image {
+  height: auto;
+  aspect-ratio: 16 / 10;
+}
+
+.project-image img {
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image img { transform: scale(1.04); }
+
+.project-image.contain { background: var(--bg-elevated); }
+.project-image.contain img { object-fit: contain; }
+
+.project-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.2rem;
+}
+.project-content h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+.project-content p { font-size: 0.85rem; margin-bottom: 0.9rem; line-height: 1.55; }
+.project-tech { gap: 0.4rem; margin-bottom: 1.1rem; }
+.project-tech .chip { font-size: 0.68rem; padding: 0.25rem 0.55rem; }
+.project-links { margin-top: auto; }
+.project-link { padding: 0.5rem 0.9rem; font-size: 0.8rem; }
+
+.project-link.static { cursor: default; }
+.project-link.static:hover { transform: none; }
+
+@media (max-width: 1000px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}

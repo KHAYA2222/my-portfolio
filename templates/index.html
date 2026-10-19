@@ -14,6 +14,10 @@
       rel="stylesheet"
     />
     <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}?v=2"
+    />
+    <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
@@ -645,17 +649,19 @@
       </section>
 
       <!-- PROJECTS -->
+
       <section class="section section-alt" id="projects">
         <div class="container">
           <div class="section-head reveal">
             <span class="eyebrow">Selected Work</span>
             <h2 class="section-title">Featured Projects</h2>
           </div>
+
           <div class="projects-grid reveal-stagger">
             <div class="project-card glass reveal">
               <div class="project-image">
                 <img
-                  src="{{ url_for('static', filename='assets/images/Daily_Trackerp1.jpg') }}"
+                  src="{{ url_for('static', filename='assets/images/Dashboard@2x.png') }}"
                   alt="Daily Tracker — a Flutter mobile app for tracking daily expenses"
                 />
               </div>
@@ -688,7 +694,7 @@
             <div class="project-card glass reveal">
               <div class="project-image">
                 <img
-                  src="{{ url_for('static', filename='assets/images/quote1_app.png') }}"
+                  src="{{ url_for('static', filename='assets/images/mood.png') }}"
                   alt="Quote App — a Flask web app for sharing mood-based quotes"
                 />
               </div>
@@ -723,6 +729,128 @@
                   >
                     <i class="fab fa-github" aria-hidden="true"></i> GitHub
                   </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Event Attendance Tracker -->
+            <div class="project-card glass reveal">
+              <div class="project-image">
+                <svg
+                  viewBox="0 0 400 240"
+                  role="img"
+                  aria-label="Architecture: Azure Functions to Cosmos DB to Data Explorer to dashboard"
+                  style="width: 100%; height: 100%"
+                  font-family="JetBrains Mono, Consolas, monospace"
+                >
+                  <defs>
+                    <marker
+                      id="arr"
+                      viewBox="0 0 8 8"
+                      refX="7"
+                      refY="4"
+                      markerWidth="6"
+                      markerHeight="6"
+                      orient="auto"
+                    >
+                      <path d="M0,0 L8,4 L0,8 z" fill="#9AAAC2" />
+                    </marker>
+                  </defs>
+
+                  <text
+                    x="200"
+                    y="28"
+                    text-anchor="middle"
+                    font-size="10"
+                    letter-spacing="2"
+                    fill="#64748B"
+                  >
+                    ARCHITECTURE
+                  </text>
+
+                  <g stroke-width="1.8" fill="rgba(255,255,255,0.045)">
+                    <rect
+                      x="20"
+                      y="56"
+                      width="160"
+                      height="56"
+                      rx="10"
+                      stroke="#0078D4"
+                    />
+                    <rect
+                      x="220"
+                      y="56"
+                      width="160"
+                      height="56"
+                      rx="10"
+                      stroke="#38BDF8"
+                    />
+                    <rect
+                      x="20"
+                      y="160"
+                      width="160"
+                      height="56"
+                      rx="10"
+                      stroke="#22C55E"
+                    />
+                    <rect
+                      x="220"
+                      y="160"
+                      width="160"
+                      height="56"
+                      rx="10"
+                      stroke="#F59E0B"
+                    />
+                  </g>
+
+                  <g
+                    stroke="#9AAAC2"
+                    stroke-width="1.6"
+                    fill="none"
+                    marker-end="url(#arr)"
+                  >
+                    <line x1="180" y1="84" x2="218" y2="84" />
+                    <path d="M300,112 V136 H100 V158" />
+                    <line x1="180" y1="188" x2="218" y2="188" />
+                  </g>
+
+                  <g
+                    text-anchor="middle"
+                    font-size="14"
+                    font-weight="600"
+                    fill="#F1F5F9"
+                  >
+                    <text x="100" y="82">Functions</text>
+                    <text x="300" y="82">Cosmos DB</text>
+                    <text x="100" y="186">Data Explorer</text>
+                    <text x="300" y="186">Dashboard</text>
+                  </g>
+                  <g text-anchor="middle" font-size="10.5" fill="#64748B">
+                    <text x="100" y="100">ingest</text>
+                    <text x="300" y="100">store</text>
+                    <text x="100" y="204">KQL</text>
+                    <text x="300" y="204">visualise</text>
+                  </g>
+                </svg>
+              </div>
+              <div class="project-content">
+                <h3>Event Attendance Tracker</h3>
+                <p>
+                  An internal serverless app that tracks event attendance by
+                  department and stream, with KQL analytics and a custom
+                  dashboard.
+                </p>
+                <div class="project-tech">
+                  <span class="chip">Azure Functions</span>
+                  <span class="chip">Cosmos DB</span>
+                  <span class="chip">Data Explorer</span>
+                  <span class="chip">KQL</span>
+                </div>
+                <div class="project-links">
+                  <span class="project-link secondary static">
+                    <i class="fas fa-lock" aria-hidden="true"></i> Internal ·
+                    Source not public
+                  </span>
                 </div>
               </div>
             </div>
