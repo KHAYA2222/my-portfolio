@@ -7,13 +7,23 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# ─── Flask-Mail Configuration ───────────────────────────
-app.config['MAIL_SERVER']   = 'smtp.gmail.com'
-app.config['MAIL_PORT']     = 587
-app.config['MAIL_USE_TLS']  = True
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')   # fixed: was passing email string as key
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-app.secret_key              = os.getenv('SECRET_KEY')
+app.secret_key = os.getenv("SECRET_KEY")
+
+if not app.secret_key:
+    raise RuntimeError("SECRET_KEY is not set. Add it to your environment or .env file.")
+
+mail_username = os.getenv('MAIL_USERNAME')
+mail_password = os.getenv('MAIL_PASSWORD')
+
+if not mail_username or not mail_password:
+    raise RuntimeError("MAIL_USERNAME and MAIL_PASSWORD must be set.")
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = mail_username
+app.config['MAIL_PASSWORD'] = mail_password
+app.secret_key = app.secret_key
 
 mail = Mail(app)
 
