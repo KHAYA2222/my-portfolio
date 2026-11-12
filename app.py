@@ -1,7 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_mail import Mail, Message
-from dotenv import load_dotenv
+from datetime import datetime, timezone
 import os
+from smtplib import SMTPException
+
+from flask import Flask, render_template, redirect, url_for, flash
+from flask_mail import Mail, Message
+from flask_wtf import FlaskForm
+from dotenv import load_dotenv
+from wtforms import StringField, TextAreaField
+from wtforms.validators import DataRequired, Email, Length, Regexp
 
 load_dotenv()
 
@@ -15,54 +21,97 @@ if not app.secret_key:
 mail_username = os.getenv('MAIL_USERNAME')
 mail_password = os.getenv('MAIL_PASSWORD')
 
-if not mail_username or not mail_password:
-    raise RuntimeError("MAIL_USERNAME and MAIL_PASSWORD must be set.")
-
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = mail_username
 app.config['MAIL_PASSWORD'] = mail_password
-app.secret_key = app.secret_key
+app.config['MAX_CONTENT_LENGTH'] = 32 * 1024
+app.config['CONTACT_ENABLED'] = bool(mail_username and mail_password)
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+
+if not app.config['CONTACT_ENABLED']:
+    app.logger.warning("Contact form disabled: configure MAIL_USERNAME and MAIL_PASSWORD.")
 
 mail = Mail(app)
 
 RECIPIENT_EMAIL = 'khayelihlexolani28@gmail.com'
 
 
-# ─── Routes ─────────────────────────────────────────────
+def strip_text(value):
+    return value.strip() if value else value
+
+
+class ContactForm(FlaskForm):
+    name = StringField('Name', filters=[strip_text], validators=[
+        DataRequired(), Length(max=100),
+        Regexp(r'^[^\r\n]+$', message='Please use a single line.'),
+    ])
+    email = StringField('Email', filters=[strip_text], validators=[
+        DataRequired(), Length(max=254), Email(),
+    ])
+    subject = StringField('Subject', filters=[strip_text], validators=[
+        DataRequired(), Length(max=150),
+        Regexp(r'^[^\r\n]+$', message='Please use a single line.'),
+    ])
+    message = TextAreaField('Message', filters=[strip_text], validators=[
+        DataRequired(), Length(max=5000),
+    ])
+
+
+@app.context_processor
+def template_context():
+    return {
+        'current_year': datetime.now(timezone.utc).year,
+        'contact_enabled': app.config['CONTACT_ENABLED'],
+    }
+
+
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', form=ContactForm())
 
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    name    = request.form['name']
-    email   = request.form['email']
-    subject = request.form['subject']
-    message = request.form['message']
+    form = ContactForm()
+    if not app.config['CONTACT_ENABLED']:
+        flash('The contact form is unavailable. Please use the email link below.', 'error')
+        return render_template('index.html', form=form), 503
+
+    if not form.validate_on_submit():
+        flash('Your message was not sent. Please review the form below.', 'error')
+        return render_template('index.html', form=form), 400
 
     try:
         msg = Message(
-            subject=f"New Contact Form Submission: {subject}",
+            subject=f"New Contact Form Submission: {form.subject.data}",
             sender=app.config['MAIL_USERNAME'],
             recipients=[RECIPIENT_EMAIL],
+            reply_to=form.email.data,
         )
         msg.body = (
-            f"Name: {name}\n"
-            f"Email: {email}\n"
-            f"Subject: {subject}\n\n"
-            f"Message:\n{message}"
+            f"Name: {form.name.data}\n"
+            f"Email: {form.email.data}\n"
+            f"Subject: {form.subject.data}\n\n"
+            f"Message:\n{form.message.data}"
         )
         mail.send(msg)
-        flash('Thank you! Your message has been sent.', 'success')
-    except Exception as e:
-        flash('Oops! Something went wrong. Please try again.', 'error')
-        print(f"Mail error: {e}")
+    except (SMTPException, OSError):
+        app.logger.exception("Contact email delivery failed")
+        flash('Your message could not be sent. Please try again or email me directly. Your draft is still below.', 'error')
+        return render_template('index.html', form=form), 503
 
-    return redirect(url_for('home'))
+    flash('Thank you! Your message has been sent.', 'success')
+    return redirect(url_for('home', _anchor='contact'), code=303)
+
+
+@app.errorhandler(413)
+def request_too_large(error):
+    flash('Your message is too large. Please keep it under 5,000 characters.', 'error')
+    return render_template('index.html', form=ContactForm(formdata=None)), 413
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

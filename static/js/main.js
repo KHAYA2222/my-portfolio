@@ -3,86 +3,90 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-links a');
   const navToggle = document.querySelector('.nav-toggle');
   const navMenu = document.getElementById('navLinks');
+  const backToTop = document.getElementById('backToTop');
+  const sections = document.querySelectorAll('main section[id]');
+  const mobileViewport = window.matchMedia('(max-width: 768px)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  const revealItems = document.querySelectorAll('.reveal');
-  const staggerContainers = document.querySelectorAll('.reveal-stagger');
-  const timelineItems = document.querySelectorAll('.timeline-item');
-
-  const revealElements = () => {
-    const triggerPoint = window.innerHeight * 0.9;
-
-    revealItems.forEach((item) => {
-      const itemTop = item.getBoundingClientRect().top;
-      if (itemTop < triggerPoint) {
-        item.classList.add('in-view');
-      }
-    });
-
-    staggerContainers.forEach((container) => {
-      const containerTop = container.getBoundingClientRect().top;
-      if (containerTop < triggerPoint) {
-        container.classList.add('in-view');
-      }
-    });
-
-    timelineItems.forEach((item, index) => {
-      const itemTop = item.getBoundingClientRect().top;
-      if (itemTop < triggerPoint) {
-        item.classList.add('visible');
-        item.style.transitionDelay = `${index * 60}ms`;
-      }
-    });
+  const closeMenu = (restoreFocus = false) => {
+    navMenu.classList.remove('active');
+    navToggle.setAttribute('aria-expanded', 'false');
+    if (restoreFocus) navToggle.focus();
   };
 
-  const setActiveLink = () => {
-    const sections = document.querySelectorAll('main section[id]');
-    let current = '';
-
-    sections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top <= 140 && rect.bottom > 140) {
-        current = section.id;
-      }
-    });
-
-    navLinks.forEach((link) => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-    });
-  };
-
-  window.toggleMenu = () => {
+  navToggle.addEventListener('click', () => {
     const isOpen = navMenu.classList.toggle('active');
     navToggle.setAttribute('aria-expanded', String(isOpen));
-  };
-
-  window.addEventListener('scroll', () => {
-    if (header) {
-      header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+  navLinks.forEach((link) => link.addEventListener('click', () => closeMenu()));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+      closeMenu(true);
     }
-    setActiveLink();
-    revealElements();
-  }, { passive: true });
+  });
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.nav')) closeMenu();
+  });
+  document.addEventListener('focusin', (event) => {
+    if (!event.target.closest('.nav')) closeMenu();
+  });
+  mobileViewport.addEventListener('change', () => closeMenu());
+  document.documentElement.classList.add('nav-ready');
 
-  window.addEventListener('resize', revealElements);
-
-  if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
-      const isOpen = navMenu.classList.toggle('active');
-      navToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-  }
-
-  document.querySelectorAll('.nav-links a').forEach((link) => {
-    link.addEventListener('click', () => {
-      if (navMenu) {
-        navMenu.classList.remove('active');
-      }
-      if (navToggle) {
-        navToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
+  document.querySelectorAll('.skill-bar-fill').forEach((bar) => {
+    bar.style.width = `${bar.dataset.level}%`;
   });
 
-  revealElements();
-  setActiveLink();
+  const updateScrollState = () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+    backToTop.classList.toggle('show', window.scrollY > 500);
+    let current = 'home';
+    sections.forEach((section) => {
+      if (section.getBoundingClientRect().top <= 160) current = section.id;
+    });
+    navLinks.forEach((link) => {
+      const active = link.hash === `#${current}`;
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+
+  let scrollPending = false;
+  const scheduleUpdate = () => {
+    if (scrollPending) return;
+    scrollPending = true;
+    window.requestAnimationFrame(() => {
+      updateScrollState();
+      scrollPending = false;
+    });
+  };
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate);
+  window.addEventListener('pageshow', scheduleUpdate);
+  updateScrollState();
+
+  // Content stays visible unless the observer is ready to reveal it.
+  if ('IntersectionObserver' in window && !reducedMotion.matches) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('reveal-pending');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal, .timeline-item').forEach((item) => {
+      item.classList.add('reveal-pending');
+      observer.observe(item);
+    });
+    reducedMotion.addEventListener('change', (event) => {
+      if (event.matches) {
+        observer.disconnect();
+        document.querySelectorAll('.reveal-pending').forEach((item) => {
+          item.classList.remove('reveal-pending');
+        });
+      }
+    });
+  }
 });
